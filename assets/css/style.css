@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    
+}
+
+
+body{
+    background-image: url("../images/papyrus-dark.png");
+    
+}
+
+.flex-container{
+    display: flex;
+    background-color: aliceblue;
+    flex-direction: column;
+    width: 800px;
+    position: relative;
+    left: 25%;
+    line-height: 10ex;
+    text-align: center;
+}
+
