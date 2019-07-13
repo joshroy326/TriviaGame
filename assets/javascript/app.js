@@ -6,12 +6,16 @@
 var intervalId;
 var clockRunning = false;
 var time = 30;
+var questionsCorrect = 0;
+var questionsWrong = 0;
 
 $(".clock-display").text("00:00");
 
 window.onload = function(){
+    $('.endGame').hide();
     $("#start-button").on("click",startGame);
     $('#start-button').on("click",startTimer);
+    $('.choices').on("click",answers);
     return hideQuestions();
     
 }
@@ -25,29 +29,54 @@ function hideQuestions(){
 }
 function startGame() {
     $('#start-container').hide();
-    console.log("timer has been started and game has been started")
+    // console.log("timer has been started and game has been started")
     return showQuestions();
- 
 }
-
+// ===========================================================================================
 //when start button is clicked it will call the start timer fucntion
-
-
 function startTimer(){
     if (!clockRunning) {
+        clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);
         clockRunning = true;
       }
     console.log("i have been clicked and running this fucntiion");
-    return decrement();
-
-    
+    return decrement(); 
 }
-
+//============================================================================================
 function decrement(){
     time--;
     $(".clock-display").text("Seconds Left: " + time);
+
+    if(time === 0){
+        stop();
+        $('.endGame').show();
+        return hideQuestions();
+        
+
+        
+    }
 }
+// ===========================================================================================
+var questionOne = $(".choice1");
+function stop(){
+    clearInterval(intervalId);
+    if(questionOne == $('#barry-bonds').val("Barry-Bonds")){
+        questionsCorrect++;
+        $("#correctanswers").text("Questions answered correct: " + questionsCorrect);
+    } else {
+        questionsWrong--;
+    }
+
+}
+// ===========================================================================================
+function answers(){
+    console.log("an answer choice has been clicked");
+}
+
+$("#correctanswers").text("Questions answered correct: " + questionsCorrect);
+$("#wrong-answers").text("Questions answered incorrect: " + questionsWrong);
+
 
 //create where when you start game it starts the timer and need to creat a fucntion that will run the timer
 
